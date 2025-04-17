@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, h1{
+  font-family: "Poppins", sans-serif;
+}
+
+h5,p,button, ul, a{
+  font-family: "Asap", sans-serif;
+}
+
+@layer utilities{
+  .btn-primary {
+    @apply w-fit m-auto border-primary border bg-primary text-white fill-white md:text-base text-sm font-medium text-center md:px-8 sm:py-3 px-4 py-3 hover:bg-transparent hover:text-primary hover:fill-primary hover:border-primary hover:-translate-y-2 duration-500 transition-all
+  }  
+  .btn-primary-border {
+    @apply w-fit m-auto border-white border bg-transparent text-white md:text-base text-sm font-medium text-center md:px-8 sm:py-3 px-4 py-3 hover:bg-primary hover:text-white hover:border-primary hover:-translate-y-2 duration-500 transition-all
+  }
+  .btn-primary-whatsapp {
+    @apply w-fit m-auto bg-[#1BB718] fill-white text-white md:text-base text-sm font-medium text-center md:px-8 sm:py-3 px-6 py-3 hover:-translate-y-2 duration-500 transition-all
+  }
+  .btn-catalogue {
+    @apply w-fit m-auto border-primary border bg-primary text-white fill-white md:text-sm text-xs font-medium text-center md:px-5 sm:py-2 px-3 py-2 hover:bg-transparent hover:text-primary hover:fill-primary hover:border-primary hover:-translate-y-2 duration-500 transition-all
+  }
+  .btn-remerciement {
+    @apply  shadow-[0px_5px_1px_5px_rgba(41,41,64,0.8)] w-fit m-auto border-2 border-secondary bg-primary text-white fill-white md:text-lg font-medium text-center md:px-8 sm:py-3 px-4 py-3 hover:bg-transparent hover:text-primary hover:fill-primary hover:border-primary hover:-translate-y-2 duration-500 transition-all
+  }
+}
+
+.marquee{
+  position: relative;
+  background-color: #C5B258;
+  color: #EEE;
+  padding: 1.8rem 0;
+  font-weight: 600;
+  font-size: 2rem;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.marquee__inner{
+  display: flex;
+  width: fit-content;
+  flex: auto;
+  flex-direction: row;
+}
+.marquee__part{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+
+.arrow {
+  margin: 0 1em;
+  transform: rotate(180deg);
+  transition: all 0.25s ease-in-out;
+}
+
+.arrow.active {
+  transform: rotate(0deg);
+}
+
+.pulse-button{
+  box-shadow: 0 0 0 0 rgba(255,255,255, .5);
+  -webkit-animation: pulse 1.5s infinite;
+}
+.pulse-button:hover {
+  -webkit-animation: none;
+}
+
+.villa .swiper{
+  padding: 0rem 0rem 0rem 0rem !important;
+}
+
+.realisations .swiper{
+  padding: 0rem 0rem 4rem 0rem !important;
+}
+
+.swiper-pagination-bullet{
+  width: 10px !important;
+  height: 10px !important;
+}
+.swiper-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 0 6px !important;
+}
+
+.swiper-pagination-bullet-active{
+  background: #292940 !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50%;
+  color: #FFF !important;
+  z-index: 999 !important;
+} 
+
+.realisations .swiper-button-prev,
+.realisations .swiper-button-next {
+  background: #292940;
+  top: var(--swiper-navigation-top-offset, 40%) !important;
+}
+
+.villa .swiper-button-prev,
+.villa .swiper-button-next {
+  background: rgba(255,255,255,.2);
+  backdrop-filter: blur(2px);
+  top: auto !important;
+  bottom: 7% !important;
+}
+
+.swiper-button-prev:after, .swiper-button-next:after{
+  font-size: .85rem !important;
+  font-weight: bold;
+}
+
+.villa .swiper-button-prev, .swiper-rtl .swiper-button-next{right: 22% !important; left: auto !important;}
+.villa .swiper-button-next, .swiper-rtl .swiper-button-prev{right: 18% !important;}
+
+.swiper-horizontal > .swiper-pagination-progressbar, .swiper-pagination-progressbar.swiper-pagination-horizontal {
+  bottom: 4% !important;
+  top: auto !important;
+  margin: 3em;
+  width: 67% !important;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.swiper-pagination-progressbar{
+  background: rgba(255,255,255,.3) !important;
+}
+
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill{
+  background: #FFF !important;
+  border-radius: 20px;
+}
+
+@media screen and (min-width: 1200px){
+  .realisations .swiper{
+    padding: 0rem 2rem 4rem 2rem !important;
+  }
+  .realisations .swiper-button-prev,
+  .realisations .swiper-button-next {
+    width: 44px !important;
+    height: 44px !important;
+  }  
+  .swiper-button-prev:after, .swiper-button-next:after{
+    font-size: 1.2rem !important;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .villa .swiper-button-prev, .swiper-rtl .swiper-button-next{left: 2% !important;}
+  .villa .swiper-button-next, .swiper-rtl .swiper-button-prev{right: 2% !important;}  
+  .swiper-horizontal > .swiper-pagination-progressbar, .swiper-pagination-progressbar.swiper-pagination-horizontal{
+    bottom: 0% !important;
+    margin: 3em;
+    width: 75% !important;
+  }
+
+  .marquee{
+    padding: 1rem 0;
+    font-size: .7rem;
+  }
+
+  .arrow img{
+    width: 30px;
+  }  
+}
+
+@-webkit-keyframes pulse {
+  0% {
+  }
+  70% {
+    box-shadow: 0 0 0 50px rgba(255,255,255, 0);
+  }
+    100% {
+    box-shadow: 0 0 0 0 rgba(255,255,255, 0);
+  }
+}
+

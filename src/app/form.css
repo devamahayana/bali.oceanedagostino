@@ -1,0 +1,136 @@
+.form-field {
+	transition: opacity 0.5s ease, max-height 0.5s ease;
+	opacity: 0;
+	max-height: 0;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	max-width: 800px;
+}
+.visible {
+	opacity: 1;
+	max-height: 550px; /* Sesuaikan dengan tinggi field yang paling tinggi */
+	overflow: visible;
+}			
+.hidd {
+	display: none;
+}
+.form__wrap{
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	padding-top: 20px;
+	border-top: 2px solid #292940;
+}
+.container__option{
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.form__option input[type="checkbox"]{
+	appearance: none;
+	opacity: 0;
+}
+.form__option-label {
+	display: inline-block;
+	position: relative;
+	font-size: 1rem;
+	cursor: pointer;
+	width: 100%;
+	padding: 20px 10px;
+	padding-left: 55px;
+	background: transparent;
+	border: 1px solid #292940;
+	transition: .3s ease;
+}
+.form__option-label::before {
+	content: "";
+	display: inline-block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	width: 26px;
+	height: 26px;
+	border: 1px solid #292940;
+	background: transparent;
+	margin-left: 20px;
+}
+.form__option-label::after {
+	content: "";
+	position: absolute;
+	display: none;
+	left: 24px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	width: 18px;
+	height: 18px;
+	background-color: #292940;
+}
+.container__option input:checked + .form__option-label {
+	background-color: #c5b258;
+}
+.container__option input:checked + .form__option-label::after {
+	display: block;
+}
+.container__option input:checked + .form__option-label::before{
+	border-color: #292940;
+}
+.button__wrap{
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-top: 1rem;
+}
+.button__wrap button{
+	padding: 13px 23px;
+	border: none;
+	background: #292940;
+	color: #fff;
+	border-radius: 2px;
+	font-size: 1rem;
+}
+.button__wrap button:nth-child(2){
+	background-color: #c5b258;
+}
+.button__wrap input[type="submit"]{
+	background-color: #1bb718; color: #FFF;
+	padding: 13px 23px;
+	border: none;
+	border-radius: 2px;
+	font-size: 1rem;
+	font-weight: 500
+}
+.form-field h1{
+	font-size: 1.3rem;
+	color: #292940;
+	font-weight: 500;
+	margin-bottom: 1rem;
+}
+.form-field input[type="text"], 
+.form-field input[type="number"], 
+.form-field input[type="email"],
+.form-field input[type="tel"]{
+	padding: 20px;
+	font-size: 1rem;
+	border: 1px solid #292940;
+	outline: none;
+	border-radius: 0px !important;
+}
+.form-field input[type="text"]:focus, 
+.form-field input[type="number"]:focus, 
+.form-field input[type="email"]:focus,
+.form-field input[type="tel"]:focus{
+	border: 1px solid #c5b258;
+}	
+
+@media screen and (max-width: 480px){
+	.container__option{
+		gap: .3rem
+	}
+}
