@@ -12,6 +12,9 @@ h5,p,button, ul, a{
 
 @layer utilities{
   .btn-primary {
+    @apply w-fit m-auto border-white border bg-white/20 backdrop-blur-xl  text-white fill-white md:text-base text-sm font-medium text-center md:px-8 sm:py-3 px-4 py-3 hover:bg-transparent hover:text-white hover:fill-white hover:border-white hover:-translate-y-2 duration-500 transition-all
+  }  
+  .btn-secondary {
     @apply w-fit m-auto border-primary border bg-primary text-white fill-white md:text-base text-sm font-medium text-center md:px-8 sm:py-3 px-4 py-3 hover:bg-transparent hover:text-primary hover:fill-primary hover:border-primary hover:-translate-y-2 duration-500 transition-all
   }  
   .btn-primary-border {
@@ -30,7 +33,7 @@ h5,p,button, ul, a{
 
 .marquee{
   position: relative;
-  background-color: #C5B258;
+  background-color: #111;
   color: #EEE;
   padding: 1.8rem 0;
   font-weight: 600;

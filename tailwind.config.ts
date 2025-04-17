@@ -12,8 +12,8 @@ export default {
         '2xl': '1600px'
       },
       colors: {        
-        'primary': '#C5B258',
-        'secondary': '#292940',
+        'primary': '#111',
+        'secondary': '#000',
         'background': '#f1f4f9',
       },
       fontFamily:{

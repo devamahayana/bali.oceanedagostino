@@ -1,13 +1,13 @@
 import React from 'react'
 import Title from './Title'
-import Banner from '../../public/image/bali/banner.webp'
+import Banner from '../../public/image/bali/banner.png'
 import Image from 'next/image'
 import { BALI } from '@/constants'
 import Links from './Link'
 
 const Bali = () => {
   return (
-    <section className='bg-secondary'>
+    <section className='bg-primary'>
       <div className='py-10 2xl:w-4/5 w-11/12 m-auto'>
         <Title
           pretitle=""
@@ -23,7 +23,7 @@ const Bali = () => {
               {BALI.map((bali) => (
                 <div className='flex flex-col' key={bali.id}>
                   <Image src={bali.image} alt='Balimmo Icon' width={50} height={50} className='md:w-[50px] w-[40px]'/>
-                  <h1 className='text-primary md:text-2xl text-xl font-medium'>{bali.title}</h1>
+                  <h1 className='text-white md:text-2xl text-xl font-medium'>{bali.title}</h1>
                   <p className='text-white md:text-base text-sm'>{bali.desc}</p>
                 </div>
               ))}

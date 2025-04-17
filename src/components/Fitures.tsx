@@ -22,7 +22,7 @@ const Fitures = () => {
               title={fitures.button}
               href='#form'
               icon=""
-              variant='btn-primary'
+              variant='btn-secondary'
             />
           </div>
         ))}

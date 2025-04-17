@@ -61,7 +61,7 @@ const Realisations = () => {
                 <h1 className="sm:text-4xl text-2xl font-bold uppercase">{realisations.name}</h1>
             </div>
 
-            <div className="flex flex-col px-5 py-3 bg-primary text-black">
+            <div className="flex flex-col px-5 py-3 bg-primary text-white">
                 <div className="flex items-center justify-between">
                     <div className="flex flex-col">
                         <h1 className="text-base font-bold">ROI {realisations.roi}</h1>

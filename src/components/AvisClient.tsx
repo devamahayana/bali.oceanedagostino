@@ -28,11 +28,11 @@ const AvisClient = () => {
         backgroundPosition: `center`,
         backgroundRepeat: `no-repeat`
       }}>
-      <div className='bg-secondary/80'>
+      <div className='bg-secondary/50'>
         <div className='py-10 pb-16 2xl:w-4/5 w-11/12 m-auto'>
           <Title
             pretitle=""
-            title="<div class='text-primary'>Avis Clients</div>"
+            title="<div class='text-white'>Avis Clients</div>"
           />
 
           <div className='flex items-center justify-center p-4 gap-4 border-2 w-fit m-auto mb-10'>
