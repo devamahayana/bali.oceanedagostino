@@ -10,11 +10,13 @@ import Villa from "@/components/Villa";
 import VillaSpesifications from "@/components/VillaSpesifications";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ContactForm from "@/components/ContactForm";
 
 
 export default function Home() {
   return (
     <>
+      {/* <ContactForm /> */}
       <Header />
       <Banner />
       <PromotionText />
