@@ -15,7 +15,7 @@ export default function ContactForm() {
     setIsSubmitting(true);
     
     try {
-      const res = await fetch('https://bali.oceanedagostino.com/contact-api.php', {
+      const res = await fetch('http://localhost:3000/contact-api.php', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

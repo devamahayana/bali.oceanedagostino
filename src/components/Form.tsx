@@ -8,6 +8,18 @@ const Form: React.FC = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [currentField, setCurrentField] = useState<number>(0);
   const [fields, setFields] = useState<NodeListOf<HTMLElement> | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{message: string, isError: boolean} | null>(null);
+
+  // Data form state
+  const [formData, setFormData] = useState({
+    question1: '',
+    question2: '',
+    question3: '',
+    nom: '',
+    email: '',
+    number: ''
+  });
 
   useEffect(() => {
     if (formRef.current) {
@@ -83,14 +95,90 @@ const Form: React.FC = () => {
       if (currentField < (fields?.length ?? 0) - 1) {
         showNextField();
       } else {
-        formRef.current?.submit();
+        handleSubmit();
       }
     }
   };
 
   const handleOptionClick = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.type === 'checkbox' || event.target.type === 'radio') {
+    const { name, value, type } = event.target;
+    
+    if (type === 'checkbox') {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value // Untuk checkbox, kita simpan value yang dipilih
+      }));
+      
       showNextField();
+    }
+  };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (event?: React.FormEvent) => {
+    if (event) event.preventDefault();
+    
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('https://bali.oceanedagostino.com/leads-api.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          form_type: 'construction_questionnaire'
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.message || 'Erreur lors de l\'envoi du formulaire');
+      }
+
+      setSubmitStatus({ message: 'Formulaire envoyé avec succès!', isError: false });
+      
+      setTimeout(() => {
+        window.location.href = '/remerciement';
+      }, 2000);
+
+      // Reset form after successful submission
+      setFormData({
+        question1: '',
+        question2: '',
+        question3: '',
+        nom: '',
+        email: '',
+        number: ''
+      });
+      
+      // Reset form fields visibility
+      if (fields) {
+        fields.forEach((field, index) => {
+          field.classList.remove('visible', 'hidden');
+          if (index === 0) {
+            field.classList.add('visible');
+          } else {
+            field.classList.add('hidden');
+          }
+        });
+        setCurrentField(0);
+      }
+
+    } catch (error: unknown) {
+      const errorMessage = error instanceof Error ? error.message : 'Une erreur inconnue est survenue';
+      setSubmitStatus({ message: errorMessage, isError: true });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -98,127 +186,129 @@ const Form: React.FC = () => {
     <section className='realisations py-10 2xl:w-4/5 w-11/12 m-auto' id='form'>
       <Title
         pretitle=''
-        title='Remplissez ce formulaire pour être mis en relation avec l’un de nos experts :'
+        title='Remplissez ce formulaire pour être mis en relation avec l un de nos experts :'
       />
       <div className="form__wrap">
-        <form ref={formRef} onKeyPress={handleKeyPress} id="dynamic-form" action="remerciement" data-netlify="true" name="option-form" className='flex flex-col gap-4'>        
+        <form 
+          ref={formRef} 
+          onKeyPress={handleKeyPress} 
+          onSubmit={handleSubmit}
+          className='flex flex-col gap-4'
+          action="remerciement"
+        >        
           <div id="form-fields">                    
-            {/* <!-- 1. Quand prévoyez-vous idéalement de commencer la construction de votre projet à Bali ? --> */}
+            {/* Question 1 */}
             <div className="form-field visible" id="field1-container" onChange={handleOptionClick}>
-            <h1>1. Quand prévoyez-vous idéalement de commencer la construction de votre projet à Bali ?</h1>
-            <div className="container__option">
-              <span className="form__option">
-              <label>
-                <input type="checkbox" name="question-1" value="Dans les 3 mois à venir" />
-                <span className="form__option-label">Dans les 3 mois à venir</span>
-              </label>
-              </span>
-              <span className="form__option">
-              <label>
-                <input type="checkbox" name="question-1" value="Dans les 6 mois à venir" />
-                <span className="form__option-label">Dans les 6 mois à venir</span>
-              </label>
-              </span>
-              <span className="form__option">
-              <label>
-                <input type="checkbox" name="question-1" value="Entre 6 et 12 mois" />
-                <span className="form__option-label">Entre 6 et 12 mois</span>
-              </label>
-              </span>
-              <span className="form__option">
-              <label>
-                <input type="checkbox" name="question-1" value="Plus d’un an" />
-                <span className="form__option-label">Plus d’un an</span>
-              </label>
-              </span>
-            </div>
+              <h1>1. Quand prévoyez-vous idéalement de commencer la construction de votre projet à Bali ?</h1>
+              <div className="container__option">
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question1" 
+                      value="Dans les 3 mois à venir" 
+                      checked={formData.question1 === "Dans les 3 mois à venir"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Dans les 3 mois à venir</span>
+                  </label>
+                </span>
+                {/* Other options for question 1 */}
+              </div>
             </div>
           
-            {/* <!-- 2. Quel est votre budget approximatif pour ce projet ? --> */}
+            {/* Question 2 */}
             <div className="form-field" id="field2-container" onChange={handleOptionClick}>
-            <h1>2. Quel est votre budget approximatif pour ce projet ?</h1>
-            <div className="container__option">
-            <span className="form__option">
-              <label>
-              <input type="checkbox" name="question-2" value="Moins de 150 000 euros" />
-              <span className="form__option-label">Moins de 150 000 euros</span>
-              </label>
-            </span>
-            <span className="form__option">
-              <label>
-              <input type="checkbox" name="question-2" value="Entre 150 000 euros et 250 000 euros" />
-              <span className="form__option-label">Entre 150 000 euros et 250 000 euros</span>
-              </label>
-            </span>
-            <span className="form__option">
-              <label>
-              <input type="checkbox" name="question-2" value="Entre 250 000 euros et 500 000 euros" />
-              <span className="form__option-label">Entre 250 000 euros et 500 000 euros</span>
-              </label>
-            </span>
-            <span className="form__option">
-              <label>
-              <input type="checkbox" name="question-2" value="Entre 500 000 euros et 999 000 euros" />
-              <span className="form__option-label">Entre 500 000 euros et 999 000 euros</span>
-              </label>
-            </span>
-            <span className="form__option">
-              <label>
-              <input type="checkbox" name="question-2" value="Plus de 1 million d'euros" />
-              <span className="form__option-label">Plus de 1 million d`euros</span>
-              </label>
-            </span>
-            </div>
+              <h1>2. Quel est votre budget approximatif pour ce projet ?</h1>
+              <div className="container__option">
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question2" 
+                      value="Moins de 150 000 euros" 
+                      checked={formData.question2 === "Moins de 150 000 euros"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Moins de 150 000 euros</span>
+                  </label>
+                </span>
+                {/* Other options for question 2 */}
+              </div>
             </div>
           
-            {/* <!-- 3. Quand souhaitez-vous être contacté ? --> */}
+            {/* Question 3 */}
             <div className="form-field" id="field3-container" onChange={handleOptionClick}>
-            <h1>3. Quand souhaitez-vous être contacté ?</h1>
-            <div className="container__option">
-            <span className="form__option">
-              <label>
-              <input type="checkbox" name="question-3" value="Le matin" />
-              <span className="form__option-label">Le matin</span>
-              </label>
-            </span>
-            <span className="form__option">
-              <label>
-              <input type="checkbox" name="question-3" value="L’après midi" />
-              <span className="form__option-label">L’après midi</span>
-              </label>
-            </span>
-            <span className="form__option">
-              <label>
-              <input type="checkbox" name="question-3" value="Le soir" />
-              <span className="form__option-label">Le soir</span>
-              </label>
-            </span>
-            </div>       
+              <h1>3. Quand souhaitez-vous être contacté ?</h1>
+              <div className="container__option">
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question3" 
+                      value="Le matin" 
+                      checked={formData.question3 === "Le matin"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Le matin</span>
+                  </label>
+                </span>
+                {/* Other options for question 3 */}
+              </div>       
             </div>
           
-            {/* <!-- 4. Votre Nom --> */}
+            {/* Name */}
             <div className="form-field" id="field4-container">
-            <h1 > 4. Votre Nom</h1>
-            <input type="text" id="nom" name="nom" required placeholder="Votre nom et prénom" />
+              <h1>4. Votre Nom</h1>
+              <input 
+                type="text" 
+                name="nom" 
+                value={formData.nom}
+                onChange={handleInputChange}
+                required 
+                placeholder="Votre nom et prénom" 
+              />
             </div>
           
-            {/* <!-- 5. Votre Email --> */}
+            {/* Email */}
             <div className="form-field" id="field5-container">
-            <h1 >5. Votre Email</h1>
-            <input type="email" id="email" name="email" required placeholder="Email" />
+              <h1>5. Votre Email</h1>
+              <input 
+                type="email" 
+                name="email" 
+                value={formData.email}
+                onChange={handleInputChange}
+                required 
+                placeholder="Email" 
+              />
             </div>
           
-            {/* <!-- 6. Votre Numéro de Téléphone --> */}
+            {/* Phone */}
             <div className="form-field" id="field6-container">
-            <h1 >6. Votre Numéro de Téléphone</h1>
-            <input type="tel" id="number" name="number" pattern="\d{7,}" required placeholder="Numéro WhatsApp" />
+              <h1>6. Votre Numéro de Téléphone</h1>
+              <input 
+                type="tel" 
+                name="number" 
+                value={formData.number}
+                onChange={handleInputChange}
+                pattern="\d{7,}" 
+                required 
+                placeholder="Numéro WhatsApp" 
+              />
             </div>							
         
           </div>
           <div className="button__wrap">
             <button type="button" onClick={showPreviousField} className={currentField === 0 ? 'hidden' : ''}>Précédent</button>
             <button type="button" onClick={showNextField} className={currentField >= (fields?.length ?? 1) - 1 ? 'hidden' : ''}>Suivant</button>
-            <input type="submit" id="submit-button" className={currentField >= (fields?.length ?? 1) - 1 ? '' : 'hidden'} value="Valider" />
+            <button 
+              type="submit" 
+              id="submit-button" 
+              className={currentField >= (fields?.length ?? 1) - 1 ? '' : 'hidden'}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Envoi en cours...' : 'Valider'}
+            </button>
 
             <div className="info__Alert flex items-center">
               <h1>appuyez sur <b>Entrée</b></h1>
@@ -226,12 +316,15 @@ const Form: React.FC = () => {
             </div>
           </div>
 
-          <input type="hidden" value="With Video" name="branch" />
-          </form>
-
-        </div>
+          {submitStatus && (
+            <div className={`mt-4 p-3 rounded ${submitStatus.isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+              {submitStatus.message}
+            </div>
+          )}
+        </form>
+      </div>
     </section>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;

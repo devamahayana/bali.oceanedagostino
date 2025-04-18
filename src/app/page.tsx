@@ -12,16 +12,16 @@
 // import Footer from "@/components/Footer";
 // import ContactForm from "@/components/ContactForm";
 // import Homes from "@/components/Homes";
-import ContactForm from "@/components/ContactForm";
-import DataComponent from "@/components/DataComponent";
+// import DataComponent from "@/components/DataComponent";
+import Form from "@/components/Form";
 
 
 export default function Home() {
   return (
     <>
     {/* <Home/> */}
-    <DataComponent/>
-    <ContactForm/>
+    {/* <DataComponent/> */}
+    <Form/>
       {/* <ContactForm />
       <Header />
       <Banner />
