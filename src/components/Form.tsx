@@ -242,11 +242,11 @@ const Form: React.FC = () => {
                     <input 
                       type="checkbox" 
                       name="question1" 
-                      value="Plus d’un an" 
-                      checked={formData.question1 === "Plus d’un an"}
+                      value="Plus d'un an" 
+                      checked={formData.question1 === "Plus d'un an"}
                       onChange={handleOptionClick}
                     />
-                    <span className="form__option-label">Plus d’un an</span>
+                    <span className="form__option-label">Plus d`un an</span>
                   </label>
                 </span>                
               </div>
@@ -313,7 +313,7 @@ const Form: React.FC = () => {
                       checked={formData.question2 === "Plus de 1 million d'euros"}
                       onChange={handleOptionClick}
                     />
-                    <span className="form__option-label">Plus de 1 million d'euros</span>
+                    <span className="form__option-label">Plus de 1 million d`euros</span>
                   </label>
                 </span>
               </div>
@@ -340,11 +340,11 @@ const Form: React.FC = () => {
                     <input 
                       type="checkbox" 
                       name="question3" 
-                      value="L’après midi" 
-                      checked={formData.question3 === "L’après midi"}
+                      value="L'après midi" 
+                      checked={formData.question3 === "L'après midi"}
                       onChange={handleOptionClick}
                     />
-                    <span className="form__option-label">L’après midi</span>
+                    <span className="form__option-label">L`après midi</span>
                   </label>
                 </span>
                 <span className="form__option">
@@ -359,7 +359,6 @@ const Form: React.FC = () => {
                     <span className="form__option-label">Le soir</span>
                   </label>
                 </span>
-                {/* Other options for question 3 */}
               </div>       
             </div>
           

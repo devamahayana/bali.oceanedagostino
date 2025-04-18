@@ -1,8 +1,3 @@
-import Links from "@/components/Link"
-import Logo from "../../../public/image/logo-potrait.svg"
-import Icon from "../../../public/image/book-cover.png"
-import Image from "next/image"
-import Link from "next/link"
 
 const page = () => {
   return (
