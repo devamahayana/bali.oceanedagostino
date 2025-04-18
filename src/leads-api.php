@@ -45,8 +45,6 @@ try {
         ':number' => htmlspecialchars($input['number'])
     ]);
 
-    print_r('berhasil');
-    die;
 
     echo json_encode([
         'success' => true,

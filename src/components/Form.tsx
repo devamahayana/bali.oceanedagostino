@@ -148,8 +148,8 @@ const Form: React.FC = () => {
       setSubmitStatus({ message: 'Formulaire envoyé avec succès!', isError: false });
       
       setTimeout(() => {
-        window.location.href = '/remerciement';
-      }, 2000);
+        window.location.href = '/remerciement.html';
+      }, 500);
 
       // Reset form after successful submission
       setFormData({
@@ -213,7 +213,42 @@ const Form: React.FC = () => {
                     <span className="form__option-label">Dans les 3 mois à venir</span>
                   </label>
                 </span>
-                {/* Other options for question 1 */}
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question1" 
+                      value="Dans les 6 mois à venir" 
+                      checked={formData.question1 === "Dans les 6 mois à venir"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Dans les 6 mois à venir</span>
+                  </label>
+                </span>
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question1" 
+                      value="Entre 6 et 12 mois" 
+                      checked={formData.question1 === "Entre 6 et 12 mois"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Entre 6 et 12 mois</span>
+                  </label>
+                </span>
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question1" 
+                      value="Plus d’un an" 
+                      checked={formData.question1 === "Plus d’un an"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Plus d’un an</span>
+                  </label>
+                </span>                
               </div>
             </div>
           
@@ -233,7 +268,54 @@ const Form: React.FC = () => {
                     <span className="form__option-label">Moins de 150 000 euros</span>
                   </label>
                 </span>
-                {/* Other options for question 2 */}
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question2" 
+                      value="Entre 150 000 euros et 250 000 euros" 
+                      checked={formData.question2 === "Entre 150 000 euros et 250 000 euros"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Entre 150 000 euros et 250 000 euros</span>
+                  </label>
+                </span>
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question2" 
+                      value="Entre 250 000 euros et 500 000 euros" 
+                      checked={formData.question2 === "Entre 250 000 euros et 500 000 euros"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Entre 250 000 euros et 500 000 euros</span>
+                  </label>
+                </span>
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question2" 
+                      value="Entre 500 000 euros et 999 000 euros" 
+                      checked={formData.question2 === "Entre 500 000 euros et 999 000 euros"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Entre 500 000 euros et 999 000 euros</span>
+                  </label>
+                </span>
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question2" 
+                      value="Plus de 1 million d'euros" 
+                      checked={formData.question2 === "Plus de 1 million d'euros"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Plus de 1 million d'euros</span>
+                  </label>
+                </span>
               </div>
             </div>
           
@@ -251,6 +333,30 @@ const Form: React.FC = () => {
                       onChange={handleOptionClick}
                     />
                     <span className="form__option-label">Le matin</span>
+                  </label>
+                </span>
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question3" 
+                      value="L’après midi" 
+                      checked={formData.question3 === "L’après midi"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">L’après midi</span>
+                  </label>
+                </span>
+                <span className="form__option">
+                  <label>
+                    <input 
+                      type="checkbox" 
+                      name="question3" 
+                      value="Le soir" 
+                      checked={formData.question3 === "Le soir"}
+                      onChange={handleOptionClick}
+                    />
+                    <span className="form__option-label">Le soir</span>
                   </label>
                 </span>
                 {/* Other options for question 3 */}

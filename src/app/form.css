@@ -99,7 +99,7 @@
 .button__wrap button:nth-child(2){
 	background-color: #111;
 }
-.button__wrap input[type="submit"]{
+.button__wrap button:nth-child(3){
 	background-color: #1bb718; color: #FFF;
 	padding: 13px 23px;
 	border: none;
