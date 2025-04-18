@@ -6,10 +6,10 @@ export async function POST(req: NextRequest) {
 
   try {
     const conn = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: 'passwordmu',
-      database: 'namadatabase',
+      host: 'srv1465.hstgr.io',
+      user: 'u827570709_balioceane',
+      password: '2Fd$HV&PmWc+',
+      database: 'u827570709_balioceaneDB',
     });
 
     await conn.execute(
